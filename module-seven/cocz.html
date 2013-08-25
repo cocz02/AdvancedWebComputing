@@ -1,0 +1,68 @@
+<html>
+<head>
+	<link rel="shortcut icon" href="http://static-a.blogo.it/aggregator/static/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="style2.css">
+	<script src="jquery.js"></script>
+		<title>Movie Search Engine</title>
+</head>
+
+<body>
+	
+	<div id="searchbox" >
+		   <input id="search" type="text" placeholder="Seach Movies Here">
+		   <input id="submit" type="submit" value="Search">
+	</div>
+	
+    <div class="main">
+    </div>
+
+</body>
+
+<script>
+$(document).ready(function(){
+
+	$('#search').keypress(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '13') {
+			var movie_title =  $("#search").val();
+			searchMovies(movie_title);
+				if (search.value == ""){
+					alert("Please insert a Movie Title.");
+				}
+		$('#search').val('');
+		}
+	});
+
+	$("#submit").click(function(){
+		var movie_title =  $("#search").val();
+		searchMovies(movie_title);
+	});
+	
+	function searchMovies(movie_title){
+		$('.main').replaceWith($('<div class="main"></div>'));
+		console.log(movie_title)
+		var server = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json'
+		$.ajax({
+			url: server,
+			dataType: 'jsonp',
+			data:{
+				q: movie_title,
+				apiKey: 'muagenz8p2k5cbv5gsvdqwp9'
+			},
+			success:showMovies
+		});	
+	}
+
+	function showMovies(response){
+		
+		console.log('response', response);
+		var movies = response.movies;
+		$('.container').empty();
+		for(var i = 0; i < movies.length; i++){
+			var movie = movies[i];
+			$('.main').append("<div class='container'><h2>" + movie.title + " (" + movie.year + ") </h2> <br><img src='" + movie.posters.thumbnail + "'/> <div id='desc'> <b>Synopsis: </b> <div id='desc'>" + movie.synopsis + " </div><br><b>Rated: </b> <div id='desc'>" + movie.mpaa_rating + " </div><br><b>In Theaters: </b><div id='desc'>" + movie.release_dates.theater + " </div><br><b>Critics Rating: </b><div id='desc'>" + movie.ratings.critics_rating + " </div><br><b>Audience Rating: </b><div id='desc'>" + movie.ratings.audience_rating + "</div> </div> </div>");
+		}
+	}
+});
+</script>
+</html>
