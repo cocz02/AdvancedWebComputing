@@ -2016,6 +2016,7 @@ fieldset[disabled] .btn-default.active {
   color: #ffffff;
   background-color: #428bca;
   border-color: #357ebd;
+  margin-right: 15px;
 }
 
 .btn-primary:hover,
@@ -2098,6 +2099,7 @@ fieldset[disabled] .btn-warning.active {
   color: #ffffff;
   background-color: #d9534f;
   border-color: #d43f3a;
+  margin-right: 15px;
 }
 
 .btn-danger:hover,
@@ -2139,6 +2141,7 @@ fieldset[disabled] .btn-danger.active {
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+  margin-right: 15px;
 }
 
 .btn-success:hover,
@@ -3122,9 +3125,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar {
   position: relative;
-  min-height: 20px;
+  min-height: 50px;
   margin-bottom: 20px;
-  background-color: #f8f8f8;
+  background-image: url('back.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   border: 1px solid #e7e7e7;
 }
 
